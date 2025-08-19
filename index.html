@@ -1,0 +1,403 @@
+<!--
+  - Bắt buộc phải <!DOCTYPE html> ở đầu trang để khi chạy sẽ khởi động chế độ standards mode, đảm bảo các thành phần HTML, CSS được render đồng nhất trên các trình duyệt hiện đại.
+  
+  - Nếu ko có <!DOCTYPE html> khai báo ở đầu sẽ rơi vào quirks mode hiển thị sai lệch với chuẩn W3C. Trình duyệt sẽ hiển thị như những năm 1990 khi này chưa có margin/padding và css không được hỗ trợ đầy đủ.
+ -->
+<!DOCTYPE html>
+
+<!-- 
+  - Khai báo thẻ <html> để bắt đầu tài liệu HTML. Trình duyệt dùng thẻ này để bắt đầu và kết thúc của một trang HTML.
+
+  - Khai báo ngôn ngữ của tài liệu HTML là tiếng Anh bằng thuộc tính lang="en" trong thẻ <html>.
+
+  - Thuộc tính dir="ltr" được sử dụng để chỉ định hướng văn bản từ trái sang phải, thường dùng cho các ngôn ngữ như tiếng Anh.
+
+  - Thuộc tính dir="rtl" được sử dụng để chỉ định hướng văn bản từ phải sang trái, thường dùng cho các ngôn ngữ như tiếng Ả Rập hoặc tiếng Hebrew.
+-->
+<html lang="en" dir="ltr">
+  <!-- 
+    - Thẻ <head> chứa các thông tin meta, tiêu đề, liên kết đến các tệp CSS và JavaScript, và các thẻ khác không hiển thị trực tiếp trên trang.
+
+    - Dù không trực tiếp hiển thị nội dung, nhưng thẻ <head> rất quan trọng vì nó cung cấp thông tin về tài liệu HTML cho trình duyệt và công cụ tìm kiếm và nó ảnh hưởng sâu sắc đến SEO (Search Engine Optimization) của trang web.
+
+    - Tất cả các thẻ con nằm trong thẻ <head>:
+      + <base>: Thiết lập URL cơ sở cho tất cả các liên kết tương đối trong tài liệu. Ví dụ: nếu có một liên kết đến "page.html", nó sẽ được hiểu là "http://example.com/page.html" nếu base là "http://example.com/".
+      + <link>: Liên kết đến các tài nguyên bên ngoài như tệp CSS, biểu tượng trang web (favicon), hoặc các tài nguyên khác. Ví dụ: <link rel="stylesheet" href="style.css"> để liên kết đến tệp CSS.
+      + <meta>: Cung cấp thông tin về tài liệu, chẳng hạn như mô tả, từ khóa, tác giả, và các thuộc tính khác. Ví dụ: <meta name="description" content="This is a sample HTML document."> để mô tả nội dung của trang.
+      + <noscript>: Hiển thị nội dung nếu trình duyệt không hỗ trợ JavaScript hoặc nếu người dùng đã tắt JavaScript. Ví dụ: <noscript>Your browser does not support JavaScript.</noscript>.
+      + <script>: Chứa mã JavaScript hoặc liên kết đến tệp JavaScript bên ngoài. Ví dụ: <script src="script.js"></script> để liên kết đến tệp JavaScript.
+      + <style>: Chứa mã CSS nội tuyến hoặc liên kết đến tệp CSS bên ngoài. Ví dụ: <style> body { background-color: #f0f0f0; } </style> để định dạng trang.
+      + <title>: Thiết lập tiêu đề của tài liệu, hiển thị trên thanh tiêu đề của trình duyệt hoặc trong tab. Ví dụ: <title>My HTML Document</title>.
+      + <template>: Được sử dụng để định nghĩa một mẫu HTML có thể được sử dụng lại sau này. Nội dung trong thẻ <template> sẽ không được hiển thị ngay lập tức khi trang được tải, nhưng có thể được sử dụng trong JavaScript để tạo nội dung động. Ví dụ: 
+        <template id="my-template">
+          <div class="my-template">
+            <p>This is a template content.</p>
+          </div>
+        </template>.
+  -->
+  <head>
+    <!--
+      - Props href: Chứa đường link cơ sở để khớp với liên kết tương đối
+
+      - Props target: Chỉ định cách liên kết sẽ mở. Nếu để trống, nó sẽ sử dụng mặc định của trình duyệt.
+        + Thuộc tính target="_blank" sẽ mở liên kết trong một tab mới.
+        + Thuộc tính target="_self" sẽ mở liên kết trong cùng một tab.
+        + Thuộc tính target="_parent" sẽ mở liên kết trong khung cha của khung hiện tại.
+        + Thuộc tính target="_top" sẽ mở liên kết trong toàn bộ cửa sổ trình duyệt, bỏ qua tất cả các khung.
+    -->
+    <!-- <base href="https://example.com/" target="_blank" /> -->
+
+    <!--
+      - Props rel: Chỉ định mối quan hệ giữa tài liệu hiện tại và tài nguyên được liên kết.
+        + rel="stylesheet" chỉ định rằng tài nguyên được liên kết là một tệp CSS.
+        + rel="icon" chỉ định rằng tài nguyên được liên kết là biểu tượng trang web (favicon).
+        + rel="manifest" chỉ định rằng tài nguyên được liên kết là tệp manifest cho Progressive Web App (PWA).
+        + rel="preload" chỉ định rằng tài nguyên được liên kết sẽ được tải trước khi trang được tải, giúp cải thiện hiệu suất.
+        + rel="prefetch" chỉ định rằng tài nguyên được liên kết sẽ được tải trước khi cần thiết, giúp cải thiện hiệu suất.
+        + rel="alternate" chỉ định rằng tài nguyên được liên kết là một phiên bản thay thế của tài liệu hiện tại, ví dụ: phiên bản dịch sang ngôn ngữ khác.
+
+      - Props href: Chứa đường dẫn đến tài nguyên được liên kết, ví dụ: tệp CSS hoặc favicon.
+
+      - Props type: Chỉ định loại MIME của tài nguyên được liên kết, ví dụ: "text/css" cho tệp CSS.
+
+      - Props media: Chỉ định loại thiết bị hoặc phương tiện mà tài nguyên được liên kết áp dụng, ví dụ: "screen"
+        + media="all" áp dụng cho tất cả các thiết bị.
+        + media="print" áp dụng cho các thiết bị in.
+        + media="screen" áp dụng cho các thiết bị pc hoặc di động.
+        + media="speech" áp dụng cho các thiết bị đọc văn bản.
+
+      - Props hreflang: Chỉ định ngôn ngữ của tài nguyên được liên kết, ví dụ: "en" cho tiếng Anh. Đi chung với rel="alternate" để chỉ định phiên bản ngôn ngữ khác của tài liệu.
+
+      - Props sizes: Chỉ định kích thước của biểu tượng được liên kết, ví dụ: "16x16" cho biểu tượng 16x16 pixel. Đi chung với rel="icon" để chỉ định kích thước của favicon.
+
+      - Props crossorigin: Chỉ định cách tài nguyên được liên kết sẽ xử lý các yêu
+        + crossorigin="anonymous" sẽ gửi yêu cầu mà không có thông tin xác thực.
+        + crossorigin="use-credentials" sẽ gửi yêu cầu với thông tin xác thực.
+
+      - Props integrity: Chứa giá trị băm của tài nguyên được liên kết, giúp xác minh tính toàn vẹn của tệp.
+
+      - Props as: Chỉ định loại tài nguyên được liên kết, ví dụ: "script" cho tệp JavaScript hoặc "style" cho tệp CSS.
+
+      - Props referrerpolicy: Chỉ định chính sách gửi thông tin giới thiệu khi liên kết được nhấp vào, ví dụ: "no-referrer" để không gửi thông tin giới thiệu.
+
+      - Props title: Cung cấp tiêu đề cho tài nguyên được liên kết, thường được sử dụng để mô tả nội dung của liên kết.
+
+      - Props download: Chỉ định rằng liên kết sẽ tải xuống tài nguyên thay vì mở nó trong trình duyệt. Nếu có giá trị, nó sẽ được sử dụng làm tên tệp khi tải xuống.
+    -->
+    <link rel="stylesheet" href="/style.css" type="text/css" media="all" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="16x16" />
+    <link rel="alternate" href="https://example.com/en" hreflang="en" />
+    <link rel="alternate" href="https://example.com/japan" hreflang="jp" />
+    <link rel="alternate" href="https://example.com/viet-nam" hreflang="vi" />
+
+    <template id="my-template">
+      <div class="my-template">
+        <p>This is a template content 2222.</p>
+      </div>
+    </template>
+
+    <template id="my-template">
+      <div class="my-template">
+        <p>This is a template content 11111.</p>
+      </div>
+    </template>
+    <script>
+      // Mã JavaScript có thể được viết ở đây hoặc liên kết đến tệp JavaScript bên ngoài
+      console.log("Hello, World!");
+      // document.addEventListener("DOMContentLoaded", function () {
+      //   const template = document.getElementById("my-template");
+      //   const clone = document.importNode(template.content, true);
+      //   document.body.appendChild(clone);
+      // });
+    </script>
+    <script src="/script.js"></script>
+  </head>
+
+  <body>
+    <!-- 
+      - Có hai loại thẻ: inline và block.
+        + Thẻ inline: Không tạo dòng mới, ví dụ: <span>, <a>, <img>, <i>, <b>, <strong>, <em>, <small>, <sub>, <sup>, <code>, <kbd>, <samp>, <var>.
+        + Thẻ block: Tạo dòng mới, ví dụ: <div>, <p>, <h1> đến <h6>.
+    -->
+    <!--
+      <div>Thẻ block</div>
+      <div>
+        <span> Thẻ inline </span>
+        <span> Thẻ inline </span>
+        <span> Thẻ inline </span>
+        <span> Thẻ inline </span>
+        <span> Thẻ inline </span>
+      </div>
+      <div>
+        <p> Thẻ block </p>
+        <p> Thẻ block </p>
+        <p> Thẻ block </p>
+        <p> Thẻ block </p>
+        <p> Thẻ block </p>
+      </div>
+    -->
+
+    <!-- 
+      Sectioning: 
+        - Thẻ <header>: Chứa tiêu đề của trang hoặc phần, thường bao gồm logo, tiêu đề và thanh điều hướng.
+        - Thẻ <nav>: Chứa các liên kết điều hướng đến các phần khác của trang hoặc trang khác.
+        - Thẻ <main>: Chứa nội dung chính của trang, không bao gồm tiêu đề, điều hướng hoặc chân trang.
+        - Thẻ <article>: Chứa một phần nội dung độc lập, có thể được xuất bản riêng biệt, ví dụ: bài viết blog hoặc tin tức.
+        - Thẻ <section>: Chứa một phần nội dung có chủ đề chung, thường có tiêu đề.
+        - Thẻ <aside>: Chứa nội dung phụ, chẳng hạn như quảng cáo hoặc thông tin bổ sung liên quan đến nội dung chính.
+        - Thẻ <footer>: Chứa chân trang của trang hoặc phần, thường bao gồm thông tin bản quyền, liên kết và thông tin liên hệ.
+    -->
+    <header>
+      a<sup>2</sup>log<sub>2</sub><small>xyz</small>
+      <del>Text is deleted</del>
+      <nav>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <article>
+        <h1>Welcome to My Website</h1>
+        <p>This is a sample HTML document.</p>
+        <dl>
+          <dt>Definition Term 1</dt>
+          <dd>This is the definition for term 1.1</dd>
+          <dd>This is the definition for term 1.2</dd>
+          <dd>This is the definition for term 1.3</dd>
+          <dt>Definition Term 2</dt>
+          <dd>This is the definition for term 2.1</dd>
+          <dd>This is the definition for term 2.2</dd>
+          <dd>
+            This is the definition for term 2.3
+            <dl>
+              <dt>Definition Term 2.3.1</dt>
+              <dd>This is the definition for term 2.3.1.1</dd>
+              <dd>This is the definition for term 2.3.1.2</dd>
+              <dd>This is the definition for term 2.3.1.3</dd>
+              <dt>Definition Term 2.3.2</dt>
+              <dd>This is the definition for term 2.3.2.1</dd>
+              <dd>This is the definition for term 2.3.2.2</dd>
+              <dd>This is the definition for term 2.3.2.3</dd>
+            </dl>
+          </dd>
+        </dl>
+        <blockquote>
+          This is a blockquote. It is used to quote text from another source.
+        </blockquote>
+        <figure>
+          <img src="/images/image.png" alt="Sample Image" />
+          <figcaption>This is a caption for the image.</figcaption>
+        </figure>
+        <video controls>
+          <source src="/videos/sample.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <iframe
+          width="560"
+          height="315"
+          src="https://benky.com.vn/tin-tuc/chuoi-say-gia-lai-lai-ra-ca-ngay"
+          title="YouTube video player"
+          frameborder="0"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen
+        ></iframe>
+        <table>
+          <caption>
+            Sample Table
+          </caption>
+          <thead>
+            <tr>
+              <th colspan="2">Header 1</th>
+              <!-- <th>Header 2</th> -->
+              <th>Header 3</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Data 1.1</td>
+              <td>Data 1.2</td>
+              <td>Data 1.3</td>
+            </tr>
+            <tr>
+              <td rowspan="2">Data 2.1</td>
+              <td>Data 2.2</td>
+              <td>Data 2.3</td>
+            </tr>
+            <tr>
+              <!-- <td>Data 3.1</td> -->
+              <td>Data 3.2</td>
+              <td>Data 3.3</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="3">Footer Information</td>
+            </tr>
+          </tfoot>
+        </table>
+      </article>
+      <section>
+        <h2>About Us</h2>
+        <p>We are a company that specializes in web development.</p>
+      </section>
+      <section>
+        <h2>Newsest</h2>
+        <div>
+          <div class="news-item">
+            <h3><a href="/chi-tiet-1.html">Latest News</a></h3>
+            <p>Check out our latest updates and articles.</p>
+          </div>
+          <div class="news-item">
+            <h3><a href="/chi-tiet-2.html">Latest News</a></h3>
+            <p>Check out our latest updates and articles.</p>
+          </div>
+          <div class="news-item">
+            <h3><a href="/chi-tiet-3.html">Latest News</a></h3>
+            <p>Check out our latest updates and articles.</p>
+          </div>
+        </div>
+      </section>
+      <aside>
+        <h3>Advertisement</h3>
+        <p>Check out our latest products!</p>
+      </aside>
+      <form>
+        <h2>Contact Us</h2>
+        <div>
+          <div>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required />
+          </div>
+          <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required />
+          </div>
+          <fieldset>
+            <legend>Check list</legend>
+            <div>
+              <label for="task-1">Task 1</label>
+              <input type="checkbox" id="task-1" name="check-list" required />
+            </div>
+            <div>
+              <label for="task-2">Task 2</label>
+              <input type="checkbox" id="task-2" name="check-list" required />
+            </div>
+            <div>
+              <label for="task-3">Task 3</label>
+              <input type="checkbox" id="task-3" name="check-list" required />
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Gender</legend>
+            <div>
+              <label for="gender-1">Men</label>
+              <input type="radio" id="gender-1" name="gender" required />
+            </div>
+            <div>
+              <label for="gender-2">Women</label>
+              <input type="radio" id="gender-2" name="gender" required />
+            </div>
+            <div>
+              <label for="gender-3">Other</label>
+              <input type="radio" id="gender-3" name="gender" required />
+            </div>
+          </fieldset>
+          <div>
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+          </div>
+          <input type="submit" value="Send Message" />
+          <input type="reset" value="Reset Form" />
+          <input type="button" value="Click Me" />
+        </div>
+      </form>
+    </main>
+
+    <footer>
+      <p>&copy; 2023 My Website. All rights reserved.</p>
+      <p>Contact us at <a href="mailto:abc@abc.com">abc@abc.com</a></p>
+    </footer>
+
+    <!-- 
+      Grouping content:
+      - Thẻ <p>: Chứa đoạn văn bản, thường được sử dụng để nhóm các câu hoặc đoạn văn bản liên quan.
+      - Thẻ <ul>: Chứa danh sách không có thứ tự, với các mục được đánh dấu bằng dấu chấm đầu dòng.
+      - Thẻ <ol>: Chứa danh sách có thứ tự, với các mục được đánh số hoặc đánh dấu theo thứ tự.
+      - Thẻ <li>: Chứa một mục trong danh sách, có thể được sử dụng trong cả thẻ <ul> và <ol>.
+      - Thẻ <dl>: Chứa danh sách định nghĩa, bao gồm các mục và định nghĩa của chúng. Ví dụ <dl></dl>
+      - Thẻ <dt>: Chứa tên của một mục trong danh sách định nghĩa.
+      - Thẻ <dd>: Chứa định nghĩa hoặc mô tả của một mục trong danh sách định nghĩa.
+      - Thẻ <blockquote>: Chứa trích dẫn từ một nguồn khác, thường được sử dụng để trích dẫn văn bản dài hoặc đoạn văn bản từ một tác giả khác.
+      - Thẻ <figure>: Chứa nội dung độc lập, chẳng hạn như hình ảnh, biểu đồ hoặc bảng, thường đi kèm với chú thích.
+      - Thẻ <figcaption>: Chứa chú thích cho nội dung trong thẻ <figure>.
+      - Thẻ <div>: Chứa một khối nội dung, thường được sử dụng để nhóm các phần tử khác lại với nhau hoặc áp dụng kiểu dáng CSS.
+    -->
+
+    <!-- 
+      Text-level semantics:
+        - Thẻ <span>: Chứa một phần văn bản, thường được sử dụng để áp dụng kiểu dáng CSS hoặc JavaScript cho một phần cụ thể của văn bản mà không tạo ra dòng mới.
+        - Thẻ <a>: Chứa liên kết đến một tài liệu khác hoặc một phần của tài liệu hiện tại, thường được sử dụng để tạo liên kết đến các trang web khác hoặc các phần khác trong cùng một trang.
+        - Thẻ <strong>: Chứa văn bản quan trọng, thường được hiển thị bằng chữ đậm để nhấn mạnh tầm quan trọng của nó.
+        - Thẻ <em>: Chứa văn bản được nhấn mạnh, thường được hiển thị bằng chữ nghiêng để nhấn mạnh ý nghĩa của nó.
+        - Thẻ <small>: Chứa văn bản nhỏ hơn, thường được sử dụng để hiển thị thông tin bổ sung hoặc chú thích.
+        - Thẻ <mark>: Chứa văn bản được đánh dấu, thường được sử dụng để làm nổi bật một phần văn bản quan trọng trong tài liệu.
+        - Thẻ <del>: Chứa văn bản đã bị xóa, thường được hiển thị bằng cách gạch ngang để chỉ ra rằng nó đã bị loại bỏ khỏi tài liệu.
+        - Thẻ <ins>: Chứa văn bản đã được chèn vào, thường được hiển thị bằng cách gạch chân để chỉ ra rằng nó đã được thêm vào tài liệu.
+        - Thẻ <code>: Chứa mã nguồn, thường được sử dụng để hiển thị mã lập trình hoặc đoạn mã trong tài liệu.
+        - Thẻ <samp>: Chứa văn bản đại diện cho đầu ra của một chương trình hoặc lệnh, thường được sử dụng để hiển thị kết quả của một lệnh hoặc chương trình.
+        - Thẻ <var>: Chứa biến trong một biểu thức toán học hoặc lập trình, thường được sử dụng để hiển thị các biến trong công thức hoặc mã lập trình.
+        - Thẻ <sub>: Chứa văn bản dưới dòng, thường được sử dụng để hiển thị các chỉ số dưới dòng trong công thức toán học hoặc hóa học.
+        - Thẻ <sup>: Chứa văn bản trên dòng, thường được sử dụng để hiển thị các chỉ số trên dòng trong công thức toán học hoặc hóa học.
+        - Thẻ <b>: Chứa văn bản được in đậm, thường được sử dụng để làm nổi bật một phần văn bản mà không có ý nghĩa ngữ nghĩa đặc biệt.
+        - Thẻ <i>: Chứa văn bản được in nghiêng, thường được sử dụng để làm nổi bật một phần văn bản mà không có ý nghĩa ngữ nghĩa đặc biệt.
+        - Thẻ <u>: Chứa văn bản được gạch chân, thường được sử  dụng để làm nổi bật một phần văn bản mà không có ý nghĩa ngữ nghĩa đặc biệt.
+    -->
+
+    <!-- 
+      Images and multimedia:
+        - Thẻ <img>: Chứa hình ảnh, thường được sử dụng để hiển thị hình ảnh trong tài liệu.
+        - Thẻ <audio>: Chứa âm thanh, thường được sử dụng để phát âm thanh trong tài liệu.
+        - Thẻ <video>: Chứa video, thường được sử dụng để phát video trong tài liệu.
+        - Thẻ <source>: Chứa nguồn cho thẻ <audio> hoặc <video>, cho phép chỉ định nhiều nguồn khác nhau cho cùng một tệp âm thanh hoặc video.
+        - Thẻ <track>: Chứa phụ đề hoặc chú thích cho thẻ <video>, thường được sử dụng để cung cấp phụ đề hoặc chú thích cho người dùng khi xem video.
+        - Thẻ <area>: Chứa các khu vực liên kết trong bản đồ hình ảnh, thường được sử dụng để xác định các khu vực có thể nhấp vào trong hình ảnh.
+    -->
+
+    <!--
+      Iframes and embeds:
+        - Thẻ <iframe>: Chứa một trang web khác trong trang hiện tại, thường được sử dụng để nhúng nội dung từ các trang web khác hoặc các ứng dụng bên ngoài.
+        - Thẻ <embed>: Chứa nội dung đa phương tiện, chẳng hạn như video hoặc âm thanh, thường được sử dụng để nhúng nội dung đa phương tiện từ các nguồn khác.
+        - Thẻ <object>: Chứa nội dung đa phương tiện hoặc tài liệu khác, thường được sử dụng để nhúng nội dung đa phương tiện hoặc tài liệu từ các nguồn khác.
+        - Thẻ <param>: Chứa tham số cho thẻ <object>, thường được sử dụng để cung cấp thông tin bổ sung cho nội dung được nhúng.
+    -->
+
+    <!-- 
+      Tabular data:
+        - Thẻ <table>: Chứa bảng, thường được sử dụng để hiển thị dữ liệu dạng bảng.
+        - Thẻ <caption>: Chứa tiêu đề cho bảng, thường được sử dụng để mô tả nội dung của bảng.
+        - Thẻ <thead>: Chứa phần đầu của bảng, thường bao gồm các tiêu đề cột.
+        - Thẻ <tbody>: Chứa phần thân của bảng, thường bao gồm các hàng dữ liệu.
+        - Thẻ <tfoot>: Chứa phần chân của bảng, thường bao gồm các tổng hoặc thông tin bổ sung.
+        - Thẻ <tr>: Chứa một hàng trong bảng, có thể nằm trong thẻ <thead>, <tbody> hoặc <tfoot>.
+        - Thẻ <th>: Chứa một ô tiêu đề trong bảng, thường được sử dụng trong thẻ <thead> để định nghĩa tiêu đề cột.
+        - Thẻ <td>: Chứa một ô dữ liệu trong bảng, thường được sử dụng trong thẻ <tbody> để định nghĩa dữ liệu trong các ô của bảng.
+    -->
+
+    <!-- 
+      Forms and input elements:
+        - Thẻ <form>: Chứa biểu mẫu, thường được sử dụng để thu thập dữ liệu từ người dùng.
+        - Thẻ <input>: Chứa các trường nhập liệu, cho phép người dùng nhập dữ liệu vào biểu mẫu.
+        - Thẻ <textarea>: Chứa vùng văn bản, cho phép người dùng nhập văn bản dài hơn so với trường nhập liệu đơn giản.
+        - Thẻ <button>: Chứa nút bấm, cho phép người dùng gửi biểu mẫu hoặc thực hiện hành động khác.
+        - Thẻ <select>: Chứa danh sách chọn, cho phép người dùng chọn một hoặc nhiều tùy chọn từ danh sách.
+        - Thẻ <option>: Chứa một tùy chọn trong danh sách chọn, thường được sử dụng trong thẻ <select>.
+        - Thẻ <label>: Chứa nhãn cho trường nhập liệu, giúp người dùng hiểu rõ hơn về mục đích của trường nhập liệu.
+        - Thẻ <fieldset>: Chứa một nhóm các trường nhập liệu liên quan, thường được sử dụng để nhóm các trường nhập liệu có liên quan với nhau.
+        - Thẻ <legend>: Chứa tiêu đề cho nhóm trường nhập liệu trong thẻ <fieldset>.
+    -->
+  </body>
+</html>
